@@ -6,6 +6,12 @@ app.use(express.json());
 app.use(cors()); 
 
 let clientesServidor = []; 
+
+app.get('/health', (req, res) => {
+        res.json({status: 'online'})
+    }
+)
+
 app.post('/api/cliente', (req, res) => {
     const { nome, cpf } = req.body;
     if (!nome || !cpf) {
@@ -65,6 +71,6 @@ app.delete('/api/cliente/:cpf', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Servidor rodando na porta ${PORT} (http://localhost:${PORT})`);
 });
